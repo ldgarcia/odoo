@@ -24,6 +24,7 @@ RUN set -x; \
             libssl-dev \
             unzip \
             xz-utils \
+            wkhtmltopdf \
         && pip3 install num2words boto3
 
 RUN set -x; \
@@ -38,16 +39,6 @@ RUN set -x; \
         && tar -C /usr/local/bin -xf dockerize.tar.gz \
         && chmod u+x /usr/local/bin/dockerize \
         && rm dockerize.tar.gz
-
-RUN set -x; \
-        curl -o wkhtmltox.tar.xz -SL https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz \
-        && echo '049b2cdec9a8254f0ef8ac273afaf54f7e25459a273e27189591edc7d7cf29db wkhtmltox.tar.xz' | sha256sum -c - \
-        && tar xvf wkhtmltox.tar.xz \
-        && cp wkhtmltox/lib/* /usr/local/lib/ \
-        && cp wkhtmltox/bin/* /usr/local/bin/ \
-        && cp -r wkhtmltox/share/man/man1 /usr/local/share/man/ \
-        && rm -rf wkhtmltox \
-        && rm wkhtmltox.tar.xz
 
 RUN set -x; \
     curl -o odoo.tar.gz -SL https://nightly.odoo.com/11.0/nightly/src/odoo_${ODOO_VERSION}.${ODOO_RELEASE}.tar.gz \
