@@ -72,6 +72,8 @@ RUN mkdir -p /mnt/extra-addons \
     && chown -R odoo:odoo /mnt/extra-addons \
     && chmod -R go-rwx /etc/odoo
 
+RUN chmod u+x /etc/odoo/entrypoint.sh
+
 USER odoo
 
 VOLUME ["/var/lib/odoo", "/mnt/extra-addons"]
